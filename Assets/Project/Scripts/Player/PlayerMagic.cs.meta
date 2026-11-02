@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: ba92e76b0abb41e47b1eaeae17162006
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fireballPrefab: {fileID: 1784801834495317911, guid: c2137bb236a676a4eb515cfb12a4c0b1, type: 3}
+  - playerController: {fileID: 5551654866752489291, guid: b0a4d7b0c33eddc4a992fdeb4cd19969, type: 3}
+  - playerCombat: {fileID: 2032884904848216721, guid: b0a4d7b0c33eddc4a992fdeb4cd19969, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

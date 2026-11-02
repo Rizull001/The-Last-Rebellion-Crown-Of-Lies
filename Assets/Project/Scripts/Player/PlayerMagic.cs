@@ -31,10 +31,11 @@ public class PlayerMagic : MonoBehaviour
 
     private void Update()
     {
-        RegenerateMana();
+        Debug.Log("PlayerMagic is running");
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log("F KEY DETECTED!");
             CastFireball();
         }
 
@@ -42,6 +43,8 @@ public class PlayerMagic : MonoBehaviour
         {
             ActivateInfusion();
         }
+
+        RegenerateMana();
     }
 
     private void RegenerateMana()
@@ -66,24 +69,41 @@ public class PlayerMagic : MonoBehaviour
 
     private void CastFireball()
     {
-        if (Time.time < nextFireballTime)
-            return;
+        Debug.Log("1. CastFireball called!");
 
-        if (fireballPrefab == null ||
-            playerController == null)
+        if (Time.time < nextFireballTime)
+        {
+            Debug.Log("2. Fireball masih cooldown!");
             return;
+        }
+
+        if (fireballPrefab == null)
+        {
+            Debug.LogError("3. Fireball Prefab belum dipasang!");
+            return;
+        }
+
+        if (playerController == null)
+        {
+            Debug.LogError("4. PlayerController belum dipasang!");
+            return;
+        }
 
         if (!UseMana(fireballCost))
+        {
+            Debug.Log("5. Mana tidak cukup!");
             return;
+        }
 
         nextFireballTime = Time.time + fireballCooldown;
 
-        Vector2 direction =
-            playerController.FacingDirection;
+        Vector2 direction = playerController.FacingDirection;
 
         Vector3 spawnPosition =
             transform.position +
             (Vector3)(direction * fireballSpawnDistance);
+
+        Debug.Log("6. Spawn position: " + spawnPosition);
 
         GameObject projectile = Instantiate(
             fireballPrefab,
@@ -91,12 +111,18 @@ public class PlayerMagic : MonoBehaviour
             Quaternion.identity
         );
 
-        Fireball fireball =
-            projectile.GetComponent<Fireball>();
+        Debug.Log("7. Fireball berhasil dibuat!");
+
+        Fireball fireball = projectile.GetComponent<Fireball>();
 
         if (fireball != null)
         {
             fireball.Initialize(direction);
+            Debug.Log("8. Fireball initialized!");
+        }
+        else
+        {
+        Debug.LogError("9. Fireball script tidak ditemukan pada Prefab!");
         }
     }
 
